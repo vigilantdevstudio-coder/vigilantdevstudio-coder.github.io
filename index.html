@@ -5,184 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIGILANT STUDIO | Game Development</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0a0c10 100%);
-            color: #c9d1d9;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .header {
-            text-align: center;
-            padding: 3rem 0;
-            position: relative;
-        }
-
-        .glow-text {
-            font-size: 4rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #58a6ff, #f778ba, #58a6ff);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease-in-out infinite;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(88, 166, 255, 0.3);
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            color: #8b949e;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .main-content {
-            text-align: center;
-            padding: 2rem 0;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-            padding: 0 1rem;
-        }
-
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: linear-gradient(145deg, #161b22, #0d1117);
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            color: #c9d1d9;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(88, 166, 255, 0.2);
-            border-color: #58a6ff;
-        }
-
-        .social-btn i {
-            font-size: 1.5rem;
-        }
-
-        .discord { color: #5865f2; }
-        .twitter { color: #1da1f2; }
-        .steam { color: #00adee; }
-        .reddit { color: #ff5700; }
-        .telegram { color: #0088cc; }
-
-        .footer {
-            margin-top: 4rem;
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid #30363d;
-            color: #8b949e;
-            font-size: 0.9rem;
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @media (max-width: 768px) {
-            .glow-text {
-                font-size: 2.5rem;
-            }
-            .tagline {
-                font-size: 1.1rem;
-            }
-            .links-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="glow-text">Vigilant Studio</div>
-            <p class="tagline">Crafting immersive worlds and unforgettable experiences</p>
-        </div>
-
-        <div class="main-content">
-            <p>We are a passionate indie game development studio dedicated to creating innovative gaming experiences. Our team is currently working on groundbreaking projects that push the boundaries of interactive entertainment.</p>
+            <div class="logo">Vigilant</div>
+            <p class="tagline">Indie game development studio crafting immersive experiences and innovative gameplay</p>
         </div>
 
         <div class="links-grid">
-            <a href="https://discord.gg/mzv8dBaKAk" class="social-btn pulse">
-                <i class="fab fa-discord discord"></i>
-                Join our Discord
+            <a href="https://discord.gg/your-invite" class="social-btn discord">
+                <i class="fab fa-discord"></i>
+                Discord
             </a>
             
-            <a href="https://x.com/VigilantDev" class="social-btn">
-                <i class="fab fa-twitter twitter"></i>
-                Follow on Twitter
+            <a href="https://twitter.com/your-profile" class="social-btn twitter">
+                <i class="fab fa-twitter"></i>
+                Twitter
             </a>
 
-            <a href="https://store.steampowered.com/" class="social-btn">
-                <i class="fab fa-steam steam"></i>
-                Wishlist on Steam
+            <a href="https://store.steampowered.com/your-game" class="social-btn steam">
+                <i class="fab fa-steam"></i>
+                Steam
             </a>
 
-            <a href="https://www.reddit.com/user/Disastrous_Chart3373/" class="social-btn">
-                <i class="fab fa-reddit reddit"></i>
-                Join our Reddit
+            <a href="https://reddit.com/r/your-subreddit" class="social-btn reddit">
+                <i class="fab fa-reddit"></i>
+                Reddit
             </a>
 
-            <a href="https://t.me/VigilantStudio" class="social-btn">
-                <i class="fab fa-telegram telegram"></i>
-                Join Telegram
+            <a href="https://t.me/your-channel" class="social-btn telegram">
+                <i class="fab fa-telegram"></i>
+                Telegram
             </a>
         </div>
-    </div>
 
-    <div class="footer">
-        <p>© 2025 Vigilant Studio. All rights reserved.</p>
-        <p>Powered by passion and innovation</p>
+        <div class="footer">
+            <p>© 2025 Vigilant Studio. All rights reserved.</p>
+        </div>
     </div>
 </body>
 </html>

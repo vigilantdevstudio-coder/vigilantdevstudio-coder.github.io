@@ -3,78 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vigilant Studio - Indie Game Development</title>
+    <title>VIGILANT STUDIO | Game Development</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #0d1117;
-            color: #c9d1d9;
-            text-align: center;
-            line-height: 1.6;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0a0c10 100%);
+            color: #c9d1d9;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
-        .logo {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #58a6ff, #f778ba);
+
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .glow-text {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #58a6ff, #f778ba, #58a6ff);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(88, 166, 255, 0.3);
         }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .tagline {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.3rem;
             color: #8b949e;
+            margin-bottom: 2rem;
+            font-weight: 300;
         }
-        .links {
+
+        .main-content {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            padding: 0 1rem;
+        }
+
+        .social-btn {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             gap: 1rem;
-            margin: 2rem 0;
-        }
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: #238636;
-            color: white;
+            padding: 1.5rem;
+            background: linear-gradient(145deg, #161b22, #0d1117);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            color: #c9d1d9;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
-        .btn:hover {
-            background-color: #2ea043;
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(88, 166, 255, 0.2);
+            border-color: #58a6ff;
         }
+
+        .social-btn i {
+            font-size: 1.5rem;
+        }
+
+        .discord { color: #5865f2; }
+        .twitter { color: #1da1f2; }
+        .steam { color: #00adee; }
+        .reddit { color: #ff5700; }
+        .telegram { color: #0088cc; }
+
         .footer {
-            margin-top: 3rem;
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #30363d;
             color: #8b949e;
             font-size: 0.9rem;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .glow-text {
+                font-size: 2.5rem;
+            }
+            .tagline {
+                font-size: 1.1rem;
+            }
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">VIGILANT STUDIO</div>
-        <p class="tagline">Creating immersive worlds and memorable experiences</p>
-
-        <p>We are a passionate indie game development studio currently working on our first project. Stay tuned for updates!</p>
-
-        <div class="links">
-            <!-- ОБЯЗАТЕЛЬНО ЗАМЕНИ ССЫЛКИ НА СВОИ! -->
-            <a href="https://discord.gg/your-link" class="btn">Join our Discord</a>
-            <a href="https://twitter.com/your-profile" class="btn">Follow on Twitter</a>
-            <a href="https://store.steampowered.com/your-game" class="btn">Wishlist on Steam</a>
+        <div class="header">
+            <div class="glow-text">Vigilant Studio</div>
+            <p class="tagline">Crafting immersive worlds and unforgettable experiences</p>
         </div>
 
-        <div class="footer">
-            © 2024 Vigilant Studio. All rights reserved.
+        <div class="main-content">
+            <p>We are a passionate indie game development studio dedicated to creating innovative gaming experiences. Our team is currently working on groundbreaking projects that push the boundaries of interactive entertainment.</p>
         </div>
+
+        <div class="links-grid">
+            <a href="https://discord.gg/your-invite" class="social-btn pulse">
+                <i class="fab fa-discord discord"></i>
+                Join our Discord
+            </a>
+            
+            <a href="https://twitter.com/your-profile" class="social-btn">
+                <i class="fab fa-twitter twitter"></i>
+                Follow on Twitter
+            </a>
+
+            <a href="https://store.steampowered.com/your-game" class="social-btn">
+                <i class="fab fa-steam steam"></i>
+                Wishlist on Steam
+            </a>
+
+            <a href="https://reddit.com/r/your-subreddit" class="social-btn">
+                <i class="fab fa-reddit reddit"></i>
+                Join our Reddit
+            </a>
+
+            <a href="https://t.me/your-channel" class="social-btn">
+                <i class="fab fa-telegram telegram"></i>
+                Join Telegram
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Vigilant Studio. All rights reserved.</p>
+        <p>Powered by passion and innovation</p>
     </div>
 </body>
 </html>

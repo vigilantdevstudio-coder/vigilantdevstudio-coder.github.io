@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANONYMOUS - Cyber Security</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to bottom, #000000, #1a1a1a, #000000);
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Matrix-style background effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .matrix-dot {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background-color: #00ff00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff4444;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: -0.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ff4444;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #ff0000, #8b0000);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .secure-btn {
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
+        }
+
+        .secure-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12rem 1rem 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .classification {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-title-main {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .hero-title-sub {
+            color: white;
+            font-weight: 300;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        .status-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            border: 1px solid #666;
+            background: transparent;
+            color: #ccc;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: #333;
+            border-color: #ff4444;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            color: #ff4444;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-classification {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ff4444;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(30, 30, 30, 0.5);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            color: #ff4444;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .feature-check {
+            color: #00ff00;
+            font-size: 0.8rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 1rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .features-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .feature-item-large {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .feature-item-large:hover {
+            transform: translateX(8px);
+        }
+
+        .feature-icon-large {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-title-large {
+            font-size: 1.2rem;
+            color: #ff4444;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .terminal-container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #00ff00;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background-color: #ff5555; }
+        .dot-yellow { background-color: #ffff55; }
+        .dot-green { background-color: #55ff55; }
+
+        .terminal-line {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Security Section */
+        .security {
+            padding: 6rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .security-card {
+            background: rgba(30, 30, 30, 0.5);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .security-card:hover {
+            border-color: rgba(255, 0, 0, 0.5);
+        }
+
+        .security-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1rem;
+        }
+
+        .security-title {
+            color: #ff4444;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .security-desc {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 1rem;
+            background: linear-gradient(45deg, rgba(139, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 1rem 2rem;
+            background: #000;
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: #ff4444;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            color: #666;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #ff4444;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 0, 0, 0.2);
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .features-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Terminal animation */
+        @keyframes terminal-typing {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .terminal-line {
+            animation: terminal-typing 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">A</div>
+                <div class="logo-text">
+                    <div class="logo-main">ANONYMOUS</div>
+                    <div class="logo-sub">CYBER SECURITY</div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#security" class="nav-link">Security</a>
+                <a href="#access" class="nav-link">Access</a>
+                <a href="#" class="secure-btn">Secure Access</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="classification">CLASSIFIED SECURITY</div>
+            <h1 class="hero-title">
+                <span class="hero-title-main">ANONYMOUS</span><br>
+                <span class="hero-title-sub">CYBER SECURITY</span>
+            </h1>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span class="status-text">OPERATIONAL STATUS: SECURE</span>
+                <div class="status-dot"></div>
+            </div>
+            <p class="hero-description">
+                Enterprise-grade security solutions for those who operate beyond conventional reach. 
+                Military-grade protection for the digital underground.
+            </p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">
+                    <span>Secure Access</span>
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </a>
+                <a href="#" class="btn-secondary">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 4s0-2 2-2h12s2 0 2 2v8s0 2-2 2H2s-2 0-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                    </svg>
+                    <span>System Status</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value">99.99%</div>
+            <div class="stat-label">Uptime</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">10ms</div>
+            <div class="stat-label">Avg Response</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">10Tbps</div>
+            <div class="stat-label">Protection</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">500+</div>
+            <div class="stat-label">Servers</div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-header">
+            <div class="section-classification">OPERATIONAL CAPABILITIES</div>
+            <h2 class="section-title">SECURITY OPERATIONS</h2>
+            <p class="section-description">
+                Military-grade solutions for those who operate beyond the reach of conventional security
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3 class="service-title">DDoS Shield</h3>
+                <p class="service-description">
+                    Multi-layered protection against sophisticated attacks
+                </p>
+                <ul class="service-features">
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Real-time threat analysis</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Global filtering network</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Zero false positives</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>24/7 security ops</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🖥️</div>
+                <h3 class="service-title">Stealth VPS</h3>
+                <p class="service-description">
+                    Anonymous hosting with military-grade security
+                </p>
+                <ul class="service-features">
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>No logs policy</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Anonymous billing</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Encrypted traffic</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Location obfuscation</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3 class="service-title">Secure Storage</h3>
+                <p class="service-description">
+                    End-to-end encrypted cloud with zero-knowledge access
+                </p>
+                <ul class="service-features">
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>AES-256 encryption</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Anonymous access</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Multi-factor auth</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <span>Secure deletion</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="features-container">
+            <div class="features-content">
+                <div class="section-header">
+                    <div class="section-classification">OPERATIONAL EXCELLENCE</div>
+                    <h2 class="section-title">ADVANCED CAPABILITIES</h2>
+                    <p class="section-description">
+                        Uncompromising security for those who cannot afford detection
+                    </p>
+                </div>
+                <div class="feature-item-large">
+                    <div class="feature-icon-large">⚡</div>
+                    <div class="feature-text">
+                        <h3 class="feature-title-large">Lightning Fast</h3>
+                        <p class="feature-desc">
+                            Automated threat detection and mitigation within milliseconds
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-item-large">
+                    <div class="feature-icon-large">🌐</div>
+                    <div class="feature-text">
+                        <h3 class="feature-title-large">Global Infrastructure</h3>
+                        <p class="feature-desc">
+                            Worldwide network of high-performance servers
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-item-large">
+                    <div class="feature-icon-large">🔒</div>
+                    <div class="feature-text">
+                        <h3 class="feature-title-large">Military-Grade Security</h3>
+                        <p class="feature-desc">
+                            AES-256 encryption and zero-knowledge privacy
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-item-large">
+                    <div class="feature-icon-large">📊</div>
+                    <div class="feature-text">
+                        <h3 class="feature-title-large">24/7 Monitoring</h3>
+                        <p class="feature-desc">
+                            Continuous surveillance and instant alerts
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                </div>
+                <div class="terminal-line">> Initializing security protocols...</div>
+                <div class="terminal-line">> Scanning for threats... [✓]</div>
+                <div class="terminal-line">> DDoS protection active [✓]</div>
+                <div class="terminal-line">> Anonymous tunnel established [✓]</div>
+                <div class="terminal-line">> Encryption: AES-256 [✓]</div>
+                <div class="terminal-line">> System status: SECURE</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="security">
+        <div class="section-header">
+            <div class="section-classification">SECURITY PROTOCOLS</div>
+            <h2 class="section-title">CLASSIFIED PROTECTION</h2>
+            <p class="section-description">
+                Multi-layered security architecture designed for maximum anonymity and protection
+            </p>
+        </div>
+        <div class="security-grid">
+            <div class="security-card">
+                <div class="security-icon">🛡️</div>
+                <h3 class="security-title">DDoS Shield</h3>
+                <p class="security-desc">Multi-layer protection</p>
+            </div>
+            <div class="security-card">
+                <div class="security-icon">👁️</div>
+                <h3 class="security-title">Anonymity</h3>
+                <p class="security-desc">Zero-knowledge privacy</p>
+            </div>
+            <div class="security-card">
+                <div class="security-icon">🔒</div>
+                <h3 class="security-title">Encryption</h3>
+                <p class="security-desc">AES-256 security</p>
+            </div>
+            <div class="security-card">
+                <div class="security-icon">⚠️</div>
+                <h3 class="security-title">Threat Detection</h3>
+                <p class="security-desc">Real-time monitoring</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="access" class="cta">
+        <div class="cta-content">
+            <div class="section-classification">SECURE ACCESS</div>
+            <h2 class="section-title">
+                READY TO <span style="color: #ff4444;">OPERATE</span> IN SHADOWS?
+            </h2>
+            <p class="section-description">
+                Join the ranks of those who operate beyond conventional security measures
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary">Secure Access</a>
+                <a href="#" class="btn-secondary">Intelligence Brief</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="logo">
+                    <div class="logo-icon">A</div>
+                    <div class="logo-text">
+                        <div class="logo-main">ANONYMOUS</div>
+                        <div class="logo-sub">CYBER SECURITY</div>
+                    </div>
+                </div>
+                <p style="color: #666; margin-top: 1rem; font-size: 0.9rem; line-height: 1.5;">
+                    Security solutions for those who operate beyond conventional reach.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Operations</h4>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">DDoS Protection</a></li>
+                    <li><a href="#" class="footer-link">VPS Hosting</a></li>
+                    <li><a href="#" class="footer-link">Cloud Storage</a></li>
+                    <li><a href="#" class="footer-link">Security Audit</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Security</h4>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Threat Intelligence</a></li>
+                    <li><a href="#" class="footer-link">Penetration Testing</a></li>
+                    <li><a href="#" class="footer-link">Security Consulting</a></li>
+                    <li><a href="#" class="footer-link">Incident Response</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Access</h4>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Secure Portal</a></li>
+                    <li><a href="#" class="footer-link">API Documentation</a></li>
+                    <li><a href="#" class="footer-link">Status Page</a></li>
+                    <li><a href="#" class="footer-link">Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ANONYMOUS. All operations classified.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create matrix background dots
+        function createMatrixBackground() {
+            const matrixBg = document.getElementById('matrixBg');
+            const dotsCount = 50;
+            
+            for (let i = 0; i < dotsCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'matrix-dot';
+                dot.style.left = `${Math.random() * 100}%`;
+                dot.style.top = `${Math.random() * 100}%`;
+                dot.style.animationDelay = `${Math.random() * 2}s`;
+                dot.style.animationDuration = `${1 + Math.random()}s`;
+                matrixBg.appendChild(dot);
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Terminal typing effect
+        function addTerminalTypingEffect() {
+            const terminalLines = document.querySelectorAll('.terminal-line');
+            terminalLines.forEach((line, index) => {
+                line.style.animationDelay = `${index * 0.5}s`;
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createMatrixBackground();
+            addTerminalTypingEffect();
+        });
+
+        // Add hover effects to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'scale(1.05)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add click effect to buttons
+        document.querySelectorAll('a').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.href && !this.href.includes('#')) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

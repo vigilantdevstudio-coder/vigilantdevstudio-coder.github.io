@@ -1,407 +1,235 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANONYMOUS - Cyber Security</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Портфолио — Ваше имя</title>
+  <meta name="description" content="Минималистичное портфолио разработчика.">
+  <style>
+    :root{
+      --bg:#0f1724; /* тёмный фон */
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#5eead4; /* мягкий акцент */
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --ff: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ff);
+      background:linear-gradient(180deg,var(--bg) 0%, #071022 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      padding:32px;
+    }
+    /* Контейнер */
+    .site{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+    }
+    /* Мобильная адаптация */
+    @media (max-width:900px){
+      .site{grid-template-columns:1fr; padding:0 12px}
+      nav{display:flex; justify-content:space-between}
+    }
+    header{
+      grid-column:1/-1;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:6px;
+    }
+    .logo{
+      display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit
+    }
+    .logo .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 6px 18px rgba(94,234,212,0.08)}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-size:14px}
+    nav a:hover{color:var(--accent)}/* Левый столбец (главный контент) */
+.main-card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding:28px;
+  border-radius:var(--radius);
+  box-shadow:0 6px 30px rgba(2,6,23,0.6);
+  border:1px solid rgba(255,255,255,0.03);
+}
+.hero{
+  display:flex;gap:20px;align-items:center
+}
+.avatar{
+  width:120px;height:120px;border-radius:14px;background:linear-gradient(135deg,#07122a, #0b1b2a);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted);font-size:14px;border:1px solid rgba(255,255,255,0.03)
+}
+.intro h1{margin:0;font-size:24px}
+.intro p{margin:6px 0 0;color:var(--muted)}
+.meta{display:flex;gap:12px;margin-top:14px}
+.pill{background:var(--glass);padding:8px 12px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
 
-        body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(to bottom, #000000, #1a1a1a, #000000);
-            color: white;
-            overflow-x: hidden;
-            position: relative;
-        }
+/* Секции */
+section{margin-top:22px}
+h2{margin:0 0 12px 0;font-size:16px}
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.project{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.project h3{margin:0 0 6px 0;font-size:14px}
+.project p{margin:0;color:var(--muted);font-size:13px}
+.project .tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted)}
 
-        /* Matrix-style background effect */
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            z-index: -1;
-        }
+/* Правый столбец */
+.aside{
+  position:sticky;top:28px;height:fit-content;padding:20px;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border-radius:var(--radius);border:1px solid rgba(255,255,255,0.02)
+}
+.skills{display:flex;flex-direction:column;gap:8px}
+.skill{display:flex;justify-content:space-between;font-size:13px}
+.bar{height:8px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;margin-top:6px}
+.bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent), rgba(94,234,212,0.4));}
 
-        .matrix-dot {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            background-color: #00ff00;
-            animation: pulse 2s infinite;
-        }
+.contact{margin-top:16px}
+.btn{display:inline-block;padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:600;background:linear-gradient(90deg,var(--accent), rgba(94,234,212,0.6));color:#052028}
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
+footer{grid-column:1/-1;margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
-            padding: 1rem 2rem;
-        }
+/* Небольшие анимации */
+.fade-up{opacity:0;transform:translateY(8px);animation:fadeUp .6s ease forwards}
+.fade-up.delay{animation-delay:.12s}
+@keyframes fadeUp{to{opacity:1;transform:none}}
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header>
+      <a class="logo" href="#">
+        <span class="dot" aria-hidden></span>
+        <span>Ваше имя</span>
+      </a>
+      <nav>
+        <a href="#about">О себе</a>
+        <a href="#projects">Проекты</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+    </header><main class="main-card">
+  <div class="hero fade-up">
+    <div class="avatar">Фото</div>
+    <div class="intro">
+      <h1>Привет — я Ваше имя</h1>
+      <p>Фронтенд / Full‑stack разработчик • Минималистичные интерфейсы • JS/HTML/CSS</p>
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
+      <div class="meta">
+        <div class="pill">Город · Россия</div>
+        <div class="pill">Открыт к работе</div>
+        <a class="pill" href="#projects">Мои работы</a>
+      </div>
+    </div>
+  </div>
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(45deg, #ff0000, #8b0000);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+  <section id="about" class="fade-up delay">
+    <h2>О себе</h2>
+    <p style="color:var(--muted);">Кратко: я создаю аккуратные, быстрые и понятные интерфейсы. Люблю писать чистый код, оптимизировать производительность и делать интерфейсы, которые приятно использовать.
+    </p>
+  </section>
 
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
+  <section id="projects" class="fade-up">
+    <h2>Проекты</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>Проект 1 — Минималистичный лендинг</h3>
+        <p>Лендинг с адаптивной версткой, плавными анимациями и оптимизацией под мобильные устройства.</p>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
+      </article>
 
-        .logo-main {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff4444;
-        }
+      <article class="project">
+        <h3>Проект 2 — Веб‑приложение</h3>
+        <p>Одностраничное приложение на чистом JS с собственным роутингом и работой с API.</p>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">API</span></div>
+      </article>
 
-        .logo-sub {
-            font-size: 0.75rem;
-            color: #666;
-            margin-top: -0.25rem;
-        }
+      <article class="project">
+        <h3>Проект 3 — Портфолио</h3>
+        <p>Текущий шаблон портфолио: минимализм, быстрая загрузка и лёгкая кастомизация.</p>
+        <div class="tags"><span class="tag">UX</span><span class="tag">Accessibility</span></div>
+      </article>
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+      <article class="project">
+        <h3>Проект 4 — Инструмент</h3>
+        <p>Утилита для удобной работы с данными и визуализации результатов.</p>
+        <div class="tags"><span class="tag">Tooling</span><span class="tag">Automation</span></div>
+      </article>
+    </div>
+  </section>
 
-        .nav-link {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 0.9rem;
-            position: relative;
-            transition: color 0.3s;
-        }
+  <section class="fade-up">
+    <h2>Навыки</h2>
+    <div style="display:grid;gap:8px;grid-template-columns:repeat(2,1fr)">
+      <div>
+        <strong>HTML & CSS</strong>
+        <div class="bar" aria-hidden><i style="width:95%"></i></div>
+      </div>
+      <div>
+        <strong>JavaScript</strong>
+        <div class="bar" aria-hidden><i style="width:82%"></i></div>
+      </div>
+      <div>
+        <strong>React / Vue</strong>
+        <div class="bar" aria-hidden><i style="width:72%"></i></div>
+      </div>
+      <div>
+        <strong>Node.js</strong>
+        <div class="bar" aria-hidden><i style="width:66%"></i></div>
+      </div>
+    </div>
+  </section>
 
-        .nav-link:hover {
-            color: #ff4444;
-        }
+</main>
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #ff0000, #8b0000);
-            transition: width 0.3s;
-        }
+<aside class="aside">
+  <div>
+    <h3 style="margin-top:0">Контакты</h3>
+    <p style="color:var(--muted);margin:6px 0 10px 0">Напиши на почту или в мессенджер — обычно отвечаю в течение дня.</p>
+    <div class="contact">
+      <a class="btn" href="mailto:youremail@example.com">youremail@example.com</a>
+    </div>
 
-        .nav-link:hover::after {
-            width: 100%;
-        }
+    <section style="margin-top:18px">
+      <h3>Дополнительно</h3>
+      <p style="color:var(--muted);font-size:13px">Резюме, ссылки на GitHub и соцсети можно добавить сюда. Можно также вставить кнопку для скачивания CV.</p>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <a class="pill" href="#">GitHub</a>
+        <a class="pill" href="#">LinkedIn</a>
+        <a class="pill" href="#" download>CV</a>
+      </div>
+    </section>
+  </div>
+</aside>
 
-        .secure-btn {
-            background: linear-gradient(45deg, #ff0000, #8b0000);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
-        }
+<footer>
+  © <span id="year"></span> Ваше имя · Простое минималистичное портфолио
+</footer>
 
-        .secure-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+  </div>  <script>
+    // Небольшая логика: текущий год и плавный скролл
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Плавный скролл для якорей (поддержка большинства браузеров)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const href=a.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
         }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 12rem 1rem 2rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .classification {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff0000, #8b0000);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero-title-main {
-            color: #ff4444;
-            font-weight: bold;
-        }
-
-        .hero-title-sub {
-            color: white;
-            font-weight: 300;
-        }
-
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            animation: pulse 1s infinite;
-        }
-
-        .status-text {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #ff0000, #8b0000);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
-        }
-
-        .btn-secondary {
-            border: 1px solid #666;
-            background: transparent;
-            color: #ccc;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-secondary:hover {
-            background: #333;
-            border-color: #ff4444;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            color: #ff4444;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 6rem 1rem;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-classification {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff0000, #8b0000);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #ff4444;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: #ccc;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: rgba(30, 30, 30, 0.5);
-            border: 1px solid rgba(255, 0, 0, 0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-        }
-
-        .service-card:hover {
-            transform: scale(1.05);
-            border-color: rgba(255, 0, 0, 0.5);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-        }
-
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(45deg, #ff0000, #8b0000);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .service-title {
-            font-size: 1.5rem;
-            color: #ff4444;
-            margin-bottom: 1rem;
-        }
-
-        .service-description {
-            color: #ccc;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .service-features {
-            list-style: none;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-
-        .feature-check {
-            color: #00ff00;
-            font-size: 0.8rem;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 1rem;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .features-container {
+      })
+    })
+  </script></body>
+</html>{
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
